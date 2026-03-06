@@ -1,122 +1,174 @@
-use rust_cohort1_2026::cal;
+mod grouping;
+mod Assignments;
+mod error_handling;
+mod file_system;
+use file_system::main as file_system;
+use error_handling::error;
+
+use grouping::group;
+const X: u32 = 5;
 
 fn main(){
     cal();
 }
-// const X: u32 = 5;
 
-// fn shadowing() {
-//     let x = 5;
-//     let x = 5 + 4;
-//     let x = x * 3;
-//     println!("{}", x);
-// }
+#[derive(Debug)]
+enum Option{
+    None,
+    Some(String)
+}
 
-// fn main() {
-//     let mut name = "John";
-//     println!("Hello, world! {}", X);
-//     println!("{}", name);
 
-//     // let y = x + 23;
-//     // X = 23;
-//     name = "Jane";
-//     println!("{}", name);
-//     println!(" ------ {}", X);
+fn main() {
+    file_system();
+    error();
+    let sample = Option::None;
+    match sample {
+        Option::Some(x) =>{
+            println!("1 a value exist and it {}", x);
+        }
+        Option::None => {
+            println!("1 no value ");
+        }
+    }
+    let sample = Option::Some("hello".to_string());
+    match sample {
+        Option::Some(x) =>{
+            println!("2 a value exist and it {}", x);
+        }
+        Option::None => {
+            println!("2 no value ");
+        }
+    }
 
-//     // shadowing();
-//     let name = String::from("martin");
-//     // user_name(name);
-//     // user_name("Chris".to_string());
-//     // user_name("Emma".to_string());
+    let sample = Some(9);
+    match sample {
+        Some(x) =>{
+            println!("2 a value exist and it {}", x);
+        }
+        _ => {
+            println!("2 no value ");
+        }
+    }
 
-//     // sub(20, 10);
+    let result:Result<&str, String> = Ok("hello");
 
-//     // user("Mark", 23, "mark@gmail.co".to_string(), true);
+    match result {
+        Ok(x)=>{
+            println!("result value {}",x);
+        }
+        Err(error)=>{
+            println!("error {}",error);
+        }
 
-//     // conditionals();
+    }
+    group();
+    let mut name = "John";
+    println!("Hello, world! {}", X);
+    println!("{}", name);
 
-//     school_conditionals();
-//     loops();
-//     while_loop();
-// }
+    // let y = x + 23;
+    // X = 23;
+    name = "Jane";
+    println!("{}", name);
+    println!(" ------ {}", X);
 
-// fn user_name(name: String) {
-//     println!("My user name is {}", name)
-// }
+    // shadowing();
+    let name = String::from("martin");
+    // user_name(name);
+    // user_name("Chris".to_string());
+    // user_name("Emma".to_string());
 
-// fn add(a: u32, b: u32) -> u32 {
-//     let sum = a + b;
+    // sub(20, 10);
 
-//     println!("The sum of {a} and {b} is {sum}");
-//     return sum;
-// }
+    // user("Mark", 23, "mark@gmail.co".to_string(), true);
 
-// fn sub(a: u32, b: u32) -> u32 {
-//     let sum = a - b;
-//     add(a, b);
+    // conditionals();
 
-//     println!("The sum of {a} and {b} is {sum}");
-//     return sum;
-// }
+    school_conditionals();
+    loops();
+    while_loop();
+}
 
-// fn user(name: &str, age: u32, email: String, is_active: bool) -> String {
-//     println!("My user name is {}, \n age is {}, \n email is {}, \n is_active is {}", name, age, email, is_active);
-//     return name.to_string();
-// }
+fn user_name(name: String) {
+    println!("My user name is {}", name)
+}
 
-// fn conditionals() {
-//     let age = 20;
+fn add(a: u32, b: u32) -> u32 {
+    let sum = a + b;
 
-//     if age > 18 {
-//         println!("You are an adult");
-//     } else if age == 18 {
-//         println!("You just became an adult")
-//     } else {
-//         println!("you are a minor")
-//     }
-// }
+    println!("The sum of {a} and {b} is {sum}");
+    return sum;
+}
 
-// fn school_conditionals() {
+fn sub(a: u32, b: u32) -> u32 {
+    let sum = a - b;
+    add(a, b);
 
-//     let time: u32 = 19;
+    println!("The sum of {a} and {b} is {sum}");
+    return sum;
+}
 
-//     if time < 8 {
-//         println!("You're early!")
-//     } else if time > 8 && time < 10 {
-//         println!("You're late and should be punished!")
-//     } else if time == 10 {
-//         println!("It's break time!")
-//     } else if time == 11 {
-//         println!("Break Over, Go back to class!")
-//     } else if time > 11 && time < 15 {
-//         println!("You should be in class!")
-//     } else if time == 15 {
-//         println!("It's Closing time!")
-//     } else {
-//         println!("You can do what ever you want after closing!")
-//     }
-// }
+fn user(name: &str, age: u32, email: String, is_active: bool) -> String {
+    println!(
+        "My user name is {}, \n age is {}, \n email is {}, \n is_active is {}",
+        name, age, email, is_active
+    );
+    return name.to_string();
+}
 
-// fn loops() {
-//     let mut count = 0;
+fn conditionals() {
+    let age = 20;
 
-//     let result = loop {
-//         count += 1;
+    if age > 18 {
+        println!("You are an adult");
+    } else if age == 18 {
+        println!("You just became an adult")
+    } else {
+        println!("you are a minor")
+    }
+}
 
-//         if count == 10 {
-//             break count * 2;
-//         }
-//         println!("Infinite loop {}", count);
-//     };
+fn school_conditionals() {
+    let time: u32 = 19;
 
-//     println!("The result is {:?}", result);
-// }
+    if time < 8 {
+        println!("You're early!")
+    } else if time > 8 && time < 10 {
+        println!("You're late and should be punished!")
+    } else if time == 10 {
+        println!("It's break time!")
+    } else if time == 11 {
+        println!("Break Over, Go back to class!")
+    } else if time > 11 && time < 15 {
+        println!("You should be in class!")
+    } else if time == 15 {
+        println!("It's Closing time!")
+    } else {
+        println!("You can do what ever you want after closing!")
+    }
+}
 
-// fn while_loop() {
-//     let mut count = 6;
+fn loops() {
+    let mut count = 0;
 
-//     while count != 0 {
-//         println!("The count is {}", count);
-//         count -= 1;
-//     }
-// }
+    let result = loop {
+        count += 1;
+
+        if count == 10 {
+            break count * 2;
+        }
+        println!("Infinite loop {}", count);
+    };
+
+    println!("The result is {:?}", result);
+}
+
+fn while_loop() {
+    let mut count = 6;
+
+    while count != 0 {
+        println!("The count is {}", count);
+        count -= 1;
+    }
+}
